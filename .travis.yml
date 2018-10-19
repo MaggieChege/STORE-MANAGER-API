@@ -7,7 +7,7 @@ install:
 
   script:
     - pytest --cov=app/api
-    - coveralls
+  
 
     after_success:
       - coveralls
