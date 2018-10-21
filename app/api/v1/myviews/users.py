@@ -1,24 +1,47 @@
-from flask import request,Flask,jsonify, make_response
-from flask_restful import Resource, reqparse
-
-from functools import wraps
+from flask_restful import Resource, Api
+from flask import request, jsonify, json, make_response
+from app.api.v1.models import Users as U , users
+from flask_jwt_extended import (create_access_token, create_refresh_token, jwt_required, jwt_refresh_token_required, get_jwt_identity, get_raw_jwt)
 class UserRegistration(Resource):
-    def get(self):
-        if request.authorization and request.authorization.username == 'admin' and request.authorization.password == 'admin':
-            return {"message":"hello"}
-        return make_response('Not Verified',401,{"www-Authenticate": 'Basic realm="Login Required"'})
+	def post(self):
+		data = request.get_json()
+		username = data['username']
+		email = data['email']
+		raw_password = data['password']
+		role = data['role']
 
+		password = U.generate_hash(raw_password)
+		user = U(username,email,password,role).create_user()
+		users.append(user)
+		return make_response(jsonify({
+            "Users" : users
+}),201)
 
+class UserLogin(Resource):
+	def post(self):
+		data = request.get_json()
+		email = request.get_json('email')
+		password=request.get_json('password')
+		if not email:
+			return {"message","email cannot be empty"}
+		if not password:
+			return {"message","password cannot be empty"}
 
-# class Er(Resource):
-#     def auth_required(f):
-#         @wraps(f)
-#         def decorated(*args, **kwargs):
-#             auth = request.authorization
-#             if auth and auth.username == 'username' and auth.password == 'password':
-#                 return f(*args, **kwargs)
-#                 return make_response('Could not verify your login!', 401, {'WWW-Authenticate': 'Basic realm="Login Required"'})
-#                 return decorated
-#     @auth_required
-#     def get(self):
-#         return jsonify(er)
+		current_user = U.find_by_email(email)
+		# check if user exists
+		if current_user == 0:
+			return {"message": "email doesnt exist"},400
+
+		if U.verify_hash(password,email) == True:
+			access_token = create_access_token(identity = email)
+			refresh_token = create_refresh_token(identity = email)
+
+			return make_response(jsonify({
+			'message':"User has successfully Logged in",
+			"status": "ok",
+			"access_token":access_token,
+			"refresh_token": refresh_token
+			}),200)
+
+		else:
+			return make_response(jsonify({"message": "Wrong Username or password"}),400)
