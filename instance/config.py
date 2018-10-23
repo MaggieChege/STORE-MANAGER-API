@@ -1,4 +1,5 @@
 # import os 
+main.config.from_object(config)
 class Config():
 	debug = False
 
