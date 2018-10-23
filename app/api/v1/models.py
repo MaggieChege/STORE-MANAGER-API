@@ -2,6 +2,18 @@ from flask import make_response, jsonify
 from passlib.hash import pbkdf2_sha256 as sha256
 
 users =[]
+def check_email(email):
+	for x in users :
+            listOfKeys = [key  for (key, value) in x.items() if value == email]
+            if listOfKeys:
+                return 1
+
+            return 0
+	# for i in users:
+		
+	# 	if e == email:
+	# 		return e
+
 
 
 class Users:
@@ -22,6 +34,7 @@ class Users:
             "role" : self.role
         }
         return user
+        
 
     def generate_hash(raw_password):
     	return sha256.hash(raw_password)
