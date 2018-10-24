@@ -2,21 +2,20 @@
 from flask import make_response, jsonify
 from passlib.hash import pbkdf2_sha256 as sha256
 
-users =[{
-            "email": "jenna@gmail.com",
-            "password": "$pbkdf2-sha256$29000$g7B27n0PwViL0RpDKCUE4A$3LZ17MobpNzcB6dpyY/bFceHi3Vlu2qe1Z.HXwXsUHU",
-            "role": "admin",
-            "userid": 1,
-            "username": "jane"
-        }]
+users =[]
+
 products =[]
 sales =[]
 
 class Users:
-    def create_user(email,password):
+    def __init__(self,email,password):
+        self.email=email
+        self.password=password
+    def create_user(self):
+        user = {"email":self.email,"password":self.password}
         userid = len(users)+ 1
         # "username" : username,,"role" :role 
-        user = {"email" : email,"password" : password}
+        
         users.append(user)
         return user
         
@@ -39,10 +38,14 @@ class Users:
              return False
         return sha256.verify(password, user['password'] )
 class Product():  
+    def __init__(self,product_name, price, quantity):
+        self.product_name=product_name
+        self.price=price
+        self.quantity=quantity
     @staticmethod
-    def create_product(product_name, price, quantity):
+    def create_product(self):
         product_id= len(products) +1
-        product = { "product_id":product_id,"product_name" : product_name,"price" :price,"quantity": quantity}
+        product = {"product_id":self.product_id,"product_name":self.product_name,"price":self.price,"quantity":self.quantity}
         products.append(product)
         return products
 
@@ -62,13 +65,20 @@ class Product():
         return 404
 
 class Sale():
+    def __init__(self,product_id,product_name,price,attendant,total_sale,quantity):
+        self.product_id=product_id
+        self.product_name=product_name
+        self.price=price
+        self.attendant=attendant
+        self.total_sale=total_sale
+        self.quantity=quantity
     @staticmethod
     def get_sales():
         return sales
     @staticmethod
     def create_sale(product_id,product_name,price,attendant,total_sale,quantity):
         sale_id= len(sales) +1
-        sale ={"sale_id": sale_id,"product_id": product_id,"product_name" : product_name,"price" : price,"attendant" : attendant,"total_sale" :total_sale,"quantity": quantity}
+        sale ={"sale_id":self.sale_id,"product_id": self.product_id,"product_name" : self.product_name,"price" : self.price,"attendant" : self.attendant,"total_sale" :self.total_sale,"quantity": self.quantity}
         sales.append(sale)
         return sales
 
