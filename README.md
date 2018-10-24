@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/MaggieChege/STORE-MANAGER-API.svg?branch=develop)](https://travis-ci.org/MaggieChege/STORE-MANAGER-API)
 
-[![Coverage Status](https://coveralls.io/repos/github/MaggieChege/STORE-MANAGER-API/badge.png?branch=develop)](https://coveralls.io/github/MaggieChege/STORE-MANAGER-API?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/MaggieChege/STORE-MANAGER-API/badge.svg?branch=develop)](https://coveralls.io/github/MaggieChege/STORE-MANAGER-API?branch=develop)
 
 # STORE-MANAGER-API
 These are the API endpoints to Both Products and Sales allowing Store Attendant/admin to add new Products/Sales 
@@ -27,13 +27,13 @@ Navigate to the project directory
 install virtual environment
 ```virtualenv env```
  Activate virtual environment
-```$ source env/bin/activate```
+``` $ source env/bin/activate```
 
  Install all dependencies for the project to work
-```$ pip install -r requirements.txt```
+``` $ pip install -r requirements.txt```
 
  Run the application
-```$ flask run ```
+``` $ flask run ```
 
 
 ## TESTING APP
@@ -43,9 +43,9 @@ The endpoints can be tested using postman. If you're on linux install postman an
 
 ## RUN TEST
 To run the unittest. Ensure you set Pythonpath or the the location of you app
-```$ export PYTHONPATH=${PYTHONPATH}:Desktop/<dir>```
+``` $ export PYTHONPATH=${PYTHONPATH}:Desktop/<dir> ```
 Then run the test
-```$ pytest -v```
+``` $ pytest -v ```
 
 
 
