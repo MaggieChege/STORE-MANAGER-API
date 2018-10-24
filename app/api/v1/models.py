@@ -3,7 +3,6 @@ from flask import make_response, jsonify
 from passlib.hash import pbkdf2_sha256 as sha256
 
 users =[]
-
 products =[]
 sales =[]
 
@@ -38,13 +37,15 @@ class Users:
              return False
         return sha256.verify(password, user['password'] )
 class Product():  
-    def __init__(self,product_name, price, quantity):
+    def __init__(self,product_id,product_name,price,quantity):
+        self.product_id=product_id
         self.product_name=product_name
         self.price=price
         self.quantity=quantity
-    @staticmethod
+
     def create_product(self):
-        product_id= len(products) +1
+        product_id =len(products)+1
+        # "product_id":self.product_id,
         product = {"product_id":self.product_id,"product_name":self.product_name,"price":self.price,"quantity":self.quantity}
         products.append(product)
         return products
@@ -65,7 +66,8 @@ class Product():
         return 404
 
 class Sale():
-    def __init__(self,product_id,product_name,price,attendant,total_sale,quantity):
+    def __init__(self,sale_id,product_id,product_name,price,attendant,total_sale,quantity):
+        self.sale_id=(sale_id)
         self.product_id=product_id
         self.product_name=product_name
         self.price=price
@@ -75,10 +77,10 @@ class Sale():
     @staticmethod
     def get_sales():
         return sales
-    @staticmethod
-    def create_sale(product_id,product_name,price,attendant,total_sale,quantity):
+    # @staticmethod
+    def create_sale(self):
         sale_id= len(sales) +1
-        sale ={"sale_id":self.sale_id,"product_id": self.product_id,"product_name" : self.product_name,"price" : self.price,"attendant" : self.attendant,"total_sale" :self.total_sale,"quantity": self.quantity}
+        sale ={"sale_id":self.sale_id,"product_id":self.product_id,"product_name" :self.product_name,"price" :self.price,"attendant" :self.attendant,"total_sale":self.total_sale,"quantity":self.quantity}
         sales.append(sale)
         return sales
 

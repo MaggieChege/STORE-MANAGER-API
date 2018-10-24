@@ -1,6 +1,7 @@
 from flask import Flask,Blueprint
 from flask_restful import Api,Resource
-from app.api.v1.myviews.views import Products,Sales,Get_sale_id,Get_product_id,UserRegistration,UserLogin
+from app.api.v1.myviews.views import Products,UserRegistration,UserLogin,Sales,Get_sale_id,Get_product_id
+# 
 # from app.api.v1.myviews.users import UserRegistration,UserLogin
 # from instance.config import app_configuration
 

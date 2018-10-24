@@ -20,19 +20,19 @@ class TestProducts(unittest.TestCase):
 		response = self.client.get("/api/v1/products",
                                 headers={'content_type': 'application/json'})
 		self.assertEqual(response.status_code,200)
-	def login(self):
-		login_details = self.client.post("http://127.0.0.1:5000/api/v1/users/login",
-			data=json.dumps(dict(email="jenna@gmail.com",password="1234567890")),
-			content_type='application/json')
-		return json.loads(login_details.data.decode())["access_token"]
-	def test_post(self):
-		response=self.client.post('http://127.0.0.1:5000/api/v1/products',
-								data= json.dumps(self.products),
-                               headers=dict(Authorization="Bearer " + self.login()),
-                              content_type='application/json')
-		res = json.loads(response.data.decode())
-		# self.assertTrue(res["message"] == "product successfully added")
-		self.assertEqual(response.status_code,201)
+	# def login(self):
+	# 	res_login = self.client.post('http://127.0.0.1:5000/api/v1/users/login', data=json.dumps(
+ #            dict(email='higi@gmail.com', password='1234567890')),
+ #                                       content_type='application/json')
+	# 	return json.loads(res_login.data.decode())["access_token"]
+	# def test_post(self):
+	# 	response=self.client.post('http://127.0.0.1:5000/api/v1/products',
+	# 							data= json.dumps(self.products),
+ #                                headers=dict(Authorization="Bearer " + self.login()),
+ #                                    content_type = 'application/json')
+	# 	resp_data = json.loads(response.data.decode())
+	# 	self.assertTrue(resp_data['message'] == 'product created successfully')
+	# 	self.assertEqual(response.status_code, 201)
 
 
 
