@@ -16,18 +16,22 @@ The admin can do the following:
 - View a particular sale by sale_id
 - View a specific product by product_id
 ## Link to Pivotal tracker
-```https://www.pivotaltracker.com/n/projects/2203105```
+``` https://www.pivotaltracker.com/n/projects/2203105 ```
 
 ## Runnig this App
   Clone this Repo
 
-```git clone https://github.com/MaggieChege/STORE-MANAGER-API.git```
+``` git clone https://github.com/MaggieChege/STORE-MANAGER-API.git ```
 
 Navigate to the project directory
 install virtual environment
-```virtualenv env```
+``` virtualenv env ```
  Activate virtual environment
-``` $ source env/bin/activate```
+
+``` $ source env/bin/activate ```
+
+ Install all dependencies for the project to work
+``` $ pip install -r requirements.txt ```
 
  Install all dependencies for the project to work
 ``` $ pip install -r requirements.txt```
@@ -39,7 +43,7 @@ install virtual environment
 ## TESTING APP
 
 The endpoints can be tested using postman. If you're on linux install postman and launch
-``` $ postman```
+``` $ postman ```
 
 ## RUN TEST
 To run the unittest. Ensure you set Pythonpath or the the location of you app
