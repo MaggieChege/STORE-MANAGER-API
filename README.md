@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/MaggieChege/STORE-MANAGER-API.svg?branch=develop)](https://travis-ci.org/MaggieChege/STORE-MANAGER-API)
+
 [![Coverage Status](https://coveralls.io/repos/github/MaggieChege/STORE-MANAGER-API/badge.svg?branch=develop)](https://coveralls.io/github/MaggieChege/STORE-MANAGER-API?branch=develop)
 
 # STORE-MANAGER-API
@@ -26,10 +27,14 @@ Navigate to the project directory
 install virtual environment
 ``` virtualenv env ```
  Activate virtual environment
+
 ``` $ source env/bin/activate ```
 
  Install all dependencies for the project to work
 ``` $ pip install -r requirements.txt ```
+
+ Install all dependencies for the project to work
+``` $ pip install -r requirements.txt```
 
  Run the application
 ``` $ flask run ```
