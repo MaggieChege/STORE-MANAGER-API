@@ -30,6 +30,8 @@ class Users:
                 return 1
 
             return 0
+
+
     @staticmethod
     def verify_hash(password,email):
         user = next((item for item in users if item["email"] == email), False)
@@ -48,12 +50,18 @@ class Product():
         # "product_id":self.product_id,
         product = {"product_id":self.product_id,"product_name":self.product_name,"price":self.price,"quantity":self.quantity}
         products.append(product)
-        return products
+        return product
+    def check_product(product_name):
+        for prod in products:
+            listOfKeys = [key  for (key, value) in prod.items() if value == product_name]
+            if listOfKeys:
+                return 1
+
+            return 0
 
     @staticmethod
     def get_product():
         return products
-
     @staticmethod
     def get_one_product(product_id):
         pro = [product for product in products if product['product_id'] == product_id] or None

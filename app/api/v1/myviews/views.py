@@ -14,7 +14,7 @@ class UserRegistration(Resource):
         email = data['email']
         raw_password = data['password']
         if not email or email =="":
-            return {"message","email cannot be empty"}
+            return make_response(jsonify({"message":"email cannot be empty"}))
         if not re.match(r"[^@]+@[^@]+\.[^@]+",email):
             return {"message": "Enter correct email format"}
                     # generate hash value for rawpassword
@@ -24,7 +24,7 @@ class UserRegistration(Resource):
             return {'message': 'email already exist'},400
         try:
             user = Users(email,password).create_user()
-            users.append(user)
+            # users.append(user)
 
             return {
 
@@ -66,9 +66,6 @@ class UserLogin(Resource):
                 'access_token': access_token,
                 'refresh_token': refresh_token
                 }, 200
-            
-
-               
         else:
             return {'message': 'Wrong credentials'},400
        
@@ -89,10 +86,19 @@ class Products(Resource):
             return 404       
         if not quantity or quantity == "":
             return 404
+        # current_product= Product.check_product(product_name)
+        # if current_product == 1:
+        #     return {"message":"Product already exists"}
+    
+        product = [product for product in products if product ["product_name"] == product_name ]
+        if product:
+            return {"message": "Product exists"}
 
         try:
             product = Product(product_id,product_name,price,quantity).create_product()
+            products.append(product)
             return make_response(jsonify({'product':product}),201)
+
         except Exception:
             print(Exception)
             return {"message":"Something went wrong",
@@ -123,7 +129,19 @@ class Sales(Resource):
         quantity = request.json.get('quantity')
         if not product_name or product_name == "":
             return 404
+        product = [product for product in products if product ["product_name"] == product_name]
+        if not product:
+            return {"message": "Product does not exist"}
+
+
+
+
         sale = Sale(sale_id,product_id,product_name,price,attendant,total_sale,quantity).create_sale()
+        if quantity > product[0]["quantity"]:
+            return {"message": "Out of stock"}
+        product[0]["quantity"] = product[0]["quantity"] - quantity
+        # if product[0]["quantity"] < 0:
+        #     return {"message":"Out of Stock"}
         return make_response(jsonify({'sale':sale}),201)
 class Get_sale_id(Resource):
     def get(self,sale_id):

@@ -5,7 +5,8 @@ class Config():
 
 class DevelopmentConfig(Config):
 	debug= True
-
+class ProductionConfig(Config):
+	debug = False
 class TestingConfig(Config):
     '''Testing app configurations'''
     TESTING = True
@@ -14,4 +15,5 @@ class TestingConfig(Config):
 app_configuration={
 	"development" : DevelopmentConfig,
 	"testing": TestingConfig,
+	"production":ProductionConfig
 }
