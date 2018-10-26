@@ -38,7 +38,6 @@ class UserTestCase(unittest.TestCase):
 	 	res = self.client.post("http://127.0.0.1:5000/api/v1/users/registration", data=json.dumps(self.register_user_empty_email),
 								 content_type='application/json')
 	 	resp_data = json.loads(res.data.decode())
-	 	# self.assertTrue(resp_data["message"] == "email cannot be empty")
 	 	self.assertEqual(res.status_code, 500)
 	def test_login_empty_email(self):
 		res_login = self.client.post("http://127.0.0.1:5000/api/v1/users/login", data=json.dumps(self.login_user_empty_email),

@@ -32,10 +32,8 @@ class TestSales(unittest.TestCase):
     def test_post(self):
         response=self.client.post('http://127.0.0.1:5000/api/v1/sales',
                                 data= json.dumps(self.sales),
-                               # headers=dict(Authorization="Bearer" + self.login()),
                               content_type='application/json')
         res = json.loads(response.data.decode())
-        # self.assertTrue(res["message"] == "product successfully added")
         self.assertEqual(response.status_code,201)
     def test_create_sale_no_token(self):
         response = self.client.post("http://127.0.0.1:5000/api/v1/sales",
